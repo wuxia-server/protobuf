@@ -1,0 +1,16 @@
+syntax = "proto3";
+package response;
+option go_package = "github.com/wuxia-server/protobuf/golang/message";
+
+// 服务端响应收到的请求
+message S2C_Response {
+    string trace = 1; //请求跟踪ID
+    string error = 2; //当请求异常时的错误信息，如请求正常该值是一个空字符串""
+    bytes result = 3; //响应内容,根据不同的业务类型需要做解析
+}
+
+// 默认的业务层响应格式
+message DefaultResult {
+    uint32 code = 1; //code码 0 代表成功 非零代表业务异常
+    string error_msg = 2; //业务处理异常处理码
+}

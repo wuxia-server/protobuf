@@ -1,0 +1,48 @@
+syntax = "proto3";
+package error;
+
+option go_package = "github.com/wuxia-server/protobuf/golang/pb/message";
+
+
+enum ErrorCode{
+  // 错误码从10000开始 预分配 错误码 通用错误码 10000 - 20000 成功为0
+  Success = 0; // 成功
+  SessionIsNil = 10000; // session为niL 可能用户未登录
+  OperationUserIdError = 10001; // 该uid不合法或者未注册
+  LoadUserInfoByProxy = 10002; // 加载用户属性出现问题
+
+  // 增加用户资产错误
+  AddUserItemErr = 10003; // 增肌道具错误
+  ConsumeItemErr = 10004; // 消耗道具错误
+  TheUidNotMatch = 10005; // session中的uid不匹配前端的传递的uid
+    NotEnoughItemDiamond = 10006; // 用户钻石不够
+
+
+
+  // 任务错误码从 20000 - 20100
+  UpdateTaskCenterError = 20001; // 更新任务失败
+  NoFoundThisTask = 20002; // 未找到该任务
+  TaskHasCollect = 20003;  // 任务已领取
+  ResetToMany = 20004;  // 任务已领取
+
+  // 登录注册错误码从 30000开始
+  ParseJwtTokenError = 30000; // 解析sdk的jwttoken失败
+  UerIdIsZero = 30001; // 登录传递的uid为0
+  ParseJwtTokenMatchError = 30002; // sdkjwttoken解析的uid 和 传递的uid不一致
+  NoFoundThisUser = 30003; // 未找到该用户
+  CreateUserError = 30004; // 创建用户失败
+  OperationDbError = 30005; // 操作数据库失败
+  UidBoundError = 30006; // 连接已绑定过UID
+
+  // 商城错误码从40000开始，包括购买和消耗
+  LoadProductError = 40000;
+  ThisProductNotExist = 40001;
+
+  // 属性相关错误码
+  NoFoundThisProp = 50000;
+
+  // 道具相关报错
+
+  NoFoundThisItem = 60000;
+  LoadAssetConfigError = 60001;
+}

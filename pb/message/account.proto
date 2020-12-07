@@ -1,0 +1,24 @@
+syntax = "proto3";
+package account;
+
+option go_package = "github.com/wuxia-server/protobuf/golang/pb/message";
+import "message/error.proto";
+
+//用于调试的登陆接口，线上会关闭
+message C2S_Login_DEBUG {
+  int64 user_id = 1; //用户id
+  string client_id = 4;  //
+}
+
+// 服务端响应收到的请求
+message S2C_Login {
+  int64 user_id = 1; //用户id
+  string nick = 2;    //用户昵称
+  string avatar = 3;  //头像URL 只在玩家设置为渠道头像来源是存在
+  uint32 avatar_source = 4;  //选择的头像源 0 默认头像、1 渠道头像、2 系统头像
+  string system_avatar = 5;  //系统头像ID
+  string lang = 6;    //语言
+  string AgoraToken = 7; // 声网token
+  error.ErrorCode Code = 8; // 后端业务员错误码
+  string  Message= 9; // 错误信息
+}
